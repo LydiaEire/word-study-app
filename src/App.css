@@ -1,38 +1,65 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+  background-color: #f7f9fc;
+  font-family: 'Arial', sans-serif;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  justify-content: space-between;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.header, .footer {
+  background-color: #282c34;
   color: white;
+  padding: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.word-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.word-card {
+  cursor: pointer;
+  width: 200px;
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-align: center;
+}
+
+.word-card h2 {
+  font-size: 24px;
+  margin: 10px 0;
+}
+
+.word-card p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.greeting {
+  background-color: #e3f2fd; 
+}
+
+.education {
+  background-color: #fff9c4; 
+}
+
+.food {
+  background-color: #ffccbc;
+}
+
+.word-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
