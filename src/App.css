@@ -1,65 +1,103 @@
-.App {
-  text-align: center;
-  background-color: #f7f9fc;
+body {
   font-family: 'Arial', sans-serif;
-  min-height: 100vh;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to right, #43cea2, #185a9d);
+  color: #333;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 20px;
-  box-sizing: border-box;
+  min-height: 100vh;
 }
 
-.header, .footer {
-  background-color: #282c34;
+header, footer {
+  background-color: #4CAF50;
   color: white;
-  padding: 20px;
-}
-
-.word-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  padding: 20px;
-}
-
-.word-card {
-  cursor: pointer;
-  width: 200px;
-  margin: 20px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #fff;
-  transition: transform 0.3s, box-shadow 0.3s;
+  padding: 15px;
   text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.word-card h2 {
-  font-size: 24px;
-  margin: 10px 0;
+.main-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
-.word-card p {
-  font-size: 16px;
-  margin: 5px 0;
+button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s, transform 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.greeting {
-  background-color: #e3f2fd; 
+button:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
 
-.education {
-  background-color: #fff9c4; 
+.table-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.food {
-  background-color: #ffccbc;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
 }
 
-.word-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+th, td {
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+  transition: background-color 0.3s;
 }
+
+tr:hover {
+  background-color: #f9f9f9;
+}
+
+.delete-btn {
+  background: #ddd;
+  border-radius: 8px;
+  padding: 8px 16px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.delete-btn:hover {
+  background-color: #e74c3c;
+  color: white; 
+  transform: scale(1.1);
+}
+
+.edit-btn, .save-btn, .cancel-btn {
+  margin-left: 4px;
+  background: #ddd;
+  border-radius: 8px;
+  padding: 8px 16px;
+  transition: transform 0.3s;
+}
+
+.edit-btn:hover, .save-btn:hover, .cancel-btn:hover {
+  transform: scale(1.1);
+}
+
+

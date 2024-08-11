@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import WordList from './components/WordList';
+import WordTable from './components/WordTable';
 import './App.css';
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
     <div className="App">
       <Header />
       <main>
-        <WordList words={words} />
+        <WordTable words={words} />
       </main>
       <Footer />
     </div>

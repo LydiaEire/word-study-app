@@ -1,14 +1,7 @@
 import React from 'react';
 
 function WordCard({ word, transcription, translation, topic }) {
-const getTopicClass = (topic) => {
-    switch (topic.toLowerCase()) {
-        case 'greeting': return 'greeting';
-        case 'education': return 'education';
-        case 'food': return 'food';
-        default: return '';
-    }
-};
+    const getTopicClass = (topic) => topic.toLowerCase();
 
 return (
     <div className={`word-card ${getTopicClass(topic)}`}>
