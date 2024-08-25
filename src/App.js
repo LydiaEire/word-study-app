@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import WordTable from './components/WordTable';
-import WordCard from './components/WordCard';
+import WordCarousel from './components/WordCarousel'; 
 import './App.css';
 
 function App() {
@@ -24,15 +24,7 @@ function App() {
       <Header />
       <main>
         <div className="card-container">
-          {words.map((wordData, index) => (
-            <WordCard
-              key={index}
-              word={wordData.word}
-              transcription={wordData.transcription}
-              translation={wordData.translation}
-              topic={wordData.topic}
-            />
-          ))}
+          <WordCarousel words={words} initialIndex={0} />
         </div>
         <WordTable words={words} />
       </main>

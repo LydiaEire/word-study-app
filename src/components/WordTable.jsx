@@ -15,7 +15,6 @@ function WordTable({ words }) {
     };
 
     const handleSaveClick = () => {
-        // Здесь можно добавить логику для сохранения изменений, например, отправку обновленных данных на сервер.
         setEditIdx(null);
     };
 

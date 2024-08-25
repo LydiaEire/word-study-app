@@ -176,4 +176,58 @@ tr:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
+.word-carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%; 
+  max-width: 600px; 
+  margin: 20px auto;
+}
+
+.word-card {
+  text-align: center;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s ease-in-out;
+  width: 100%;
+  max-width: 400px; 
+  background-color: white; 
+}
+
+.show-translation-button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  transition: background-color 0.3s ease;
+  border-radius: 4px;
+}
+
+.show-translation-button:hover {
+  background-color: #0056b3;
+}
+
+.carousel-control {
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  cursor: pointer;
+  font-size: 2rem;
+  padding: 10px;
+  transition: transform 0.3s ease;
+  margin-right: 20px;
+}
+
+.carousel-control:hover {
+  transform: scale(1.1);
+}
+
+.carousel-control:focus {
+  outline: none;
+}
 
