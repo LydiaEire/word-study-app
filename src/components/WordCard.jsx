@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function WordCard({ word, transcription, translation, topic }) {
+function WordCard({ word, transcription, translation, topic, children }) {
     const [showTranslation, setShowTranslation] = useState(false);
 
     const getTopicClass = (topic) => topic.toLowerCase();
@@ -21,6 +21,7 @@ function WordCard({ word, transcription, translation, topic }) {
                 </button>
             )}
             <p><strong>Тема:</strong> {topic}</p>
+            {children}
         </div>
     );
 }
