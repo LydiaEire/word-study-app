@@ -1,12 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Navigation from './components/Navigation';
 import WordTable from './components/WordTable';
-import WordCarousel from './components/WordCarousel'; 
-import './App.css';
+import WordCarousel from './components/WordCarousel';
+import NotFoundPage from './components/NotFoundPage';
+
+function HomePage({ words }) {
+  return (
+    <main className="main-content">
+      <WordTable words={words} />
+    </main>
+  );
+}
+
+function GamePage({ words }) {
+  return (
+    <main className="main-content">
+      <div className="card-container">
+        <WordCarousel words={words} />
+      </div>
+    </main>
+  );
+}
 
 function App() {
-  const words = [
+  const initialWords = [
     { word: 'Hello', transcription: '[həˈloʊ]', translation: 'Привет', topic: 'Greeting' },
     { word: 'Book', transcription: '[bʊk]', translation: 'Книга', topic: 'Education' },
     { word: 'Apple', transcription: '[ˈæpəl]', translation: 'Яблоко', topic: 'Food' },
@@ -19,21 +39,29 @@ function App() {
     { word: 'Water', transcription: '[ˈwɔtər]', translation: 'Вода', topic: 'Food' },
   ];
 
+  const [words, setWords] = useState(initialWords);
+
+  const updateWord = (index, newWord) => {
+    const updatedWords = words.slice();
+    updatedWords[index] = newWord;
+    setWords(updatedWords);
+  };
+
   return (
-    <div className="App">
-      <Header />
-      <main>
-        <div className="card-container">
-          <WordCarousel words={words} initialIndex={0} />
-        </div>
-        <WordTable words={words} />
-      </main>
-      <Footer />
-    </div>
+    <Router>
+      <div className="app-container">
+        <Navigation />
+        <Header />
+        <Routes>
+          <Route path="/" element={<HomePage words={words} />} />
+          <Route path="/game" element={<GamePage words={words} />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
 export default App;
-
-
 

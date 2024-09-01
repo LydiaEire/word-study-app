@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function WordTable({ words }) {
+function WordTable({ words, onWordChange }) {
     const [editIdx, setEditIdx] = useState(null);
     const [editedWord, setEditedWord] = useState({});
 
@@ -15,7 +15,8 @@ function WordTable({ words }) {
     };
 
     const handleSaveClick = () => {
-        setEditIdx(null);
+        onWordChange(editIdx, editedWord);
+        handleCancelClick();
     };
 
     return (
@@ -37,24 +38,24 @@ function WordTable({ words }) {
                             {editIdx === index ? (
                                 <>
                                     <td>
-                                        <input 
-                                            type="text" 
-                                            value={editedWord.word || ''} 
-                                            onChange={(e) => setEditedWord({ ...editedWord, word: e.target.value })} 
+                                        <input
+                                            type="text"
+                                            value={editedWord.word || ''}
+                                            onChange={(e) => setEditedWord({ ...editedWord, word: e.target.value })}
                                         />
                                     </td>
                                     <td>
-                                        <input 
-                                            type="text" 
-                                            value={editedWord.transcription || ''} 
-                                            onChange={(e) => setEditedWord({ ...editedWord, transcription: e.target.value })} 
+                                        <input
+                                            type="text"
+                                            value={editedWord.transcription || ''}
+                                            onChange={(e) => setEditedWord({ ...editedWord, transcription: e.target.value })}
                                         />
                                     </td>
                                     <td>
-                                        <input 
-                                            type="text" 
-                                            value={editedWord.translation || ''} 
-                                            onChange={(e) => setEditedWord({ ...editedWord, translation: e.target.value })} 
+                                        <input
+                                            type="text"
+                                            value={editedWord.translation || ''}
+                                            onChange={(e) => setEditedWord({ ...editedWord, translation: e.target.value })}
                                         />
                                     </td>
                                     <td>
@@ -81,4 +82,3 @@ function WordTable({ words }) {
 }
 
 export default WordTable;
-
