@@ -4,23 +4,13 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Navigation from './components/Navigation';
 import WordTable from './components/WordTable';
-import WordCarousel from './components/WordCarousel';
-import NotFoundPage from './components/NotFoundPage';
+import NotFoundPage from './pages/NotFoundPage';
+import GamePage from './pages/GamePage';
 
 function HomePage({ words }) {
   return (
     <main className="main-content">
       <WordTable words={words} />
-    </main>
-  );
-}
-
-function GamePage({ words }) {
-  return (
-    <main className="main-content">
-      <div className="card-container">
-        <WordCarousel words={words} />
-      </div>
     </main>
   );
 }
@@ -40,11 +30,16 @@ function App() {
   ];
 
   const [words, setWords] = useState(initialWords);
+  const [learnedCount, setLearnedCount] = useState(0);
 
   const updateWord = (index, newWord) => {
     const updatedWords = words.slice();
     updatedWords[index] = newWord;
     setWords(updatedWords);
+  };
+
+  const increaseLearnedCount = () => {
+    setLearnedCount(prevCount => prevCount + 1);
   };
 
   return (
@@ -54,9 +49,17 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<HomePage words={words} />} />
-          <Route path="/game" element={<GamePage words={words} />} />
+          <Route path="/game" element={
+            <GamePage
+              words={words}
+              updateWord={updateWord}
+              onTranslationViewed={increaseLearnedCount}
+              learnedCount={learnedCount}
+            />}
+          />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
+
         <Footer />
       </div>
     </Router>
@@ -64,4 +67,3 @@ function App() {
 }
 
 export default App;
-

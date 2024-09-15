@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import WordCard from './WordCard';
 
-function WordCarousel({ words, initialIndex }) {
+function WordCarousel({ words, initialIndex, onTranslationViewed }) {
     const [currentIndex, setCurrentIndex] = useState(initialIndex || 0);
 
     const handleNext = () => {
@@ -26,7 +26,7 @@ function WordCarousel({ words, initialIndex }) {
             <button onClick={handlePrevious} className="carousel-control">
                 &lt;
             </button>
-            <WordCard {...words[currentIndex]} />
+            <WordCard {...words[currentIndex]} onTranslationViewed={onTranslationViewed} />
             <button onClick={handleNext} className="carousel-control">
                 &gt;
             </button>
@@ -44,11 +44,13 @@ WordCarousel.propTypes = {
         })
     ),
     initialIndex: PropTypes.number,
+    onTranslationViewed: PropTypes.func, 
 };
 
 WordCarousel.defaultProps = {
     words: [],
     initialIndex: 0,
+    onTranslationViewed: () => {}, 
 };
 
 export default WordCarousel;
