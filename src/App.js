@@ -7,10 +7,10 @@ import WordTable from './components/WordTable';
 import NotFoundPage from './pages/NotFoundPage';
 import GamePage from './pages/GamePage';
 
-function HomePage({ words }) {
+function HomePage({ words, onWordChange }) {
   return (
     <main className="main-content">
-      <WordTable words={words} />
+      <WordTable words={words} onWordChange={onWordChange} />
     </main>
   );
 }
@@ -48,7 +48,7 @@ function App() {
         <Navigation />
         <Header />
         <Routes>
-          <Route path="/" element={<HomePage words={words} />} />
+          <Route path="/" element={<HomePage words={words} onWordChange={updateWord} />} />
           <Route path="/game" element={
             <GamePage
               words={words}
@@ -59,7 +59,6 @@ function App() {
           />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
-
         <Footer />
       </div>
     </Router>

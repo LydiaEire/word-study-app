@@ -1,20 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function WordTable({ words, onWordChange }) {
     const [editIdx, setEditIdx] = useState(null);
     const [editedWord, setEditedWord] = useState({});
+    const [errors, setErrors] = useState({});
+
+    useEffect(() => {
+        validateFields();
+    }, [editedWord]);
+
+    const validateFields = () => {
+        let newErrors = {};
+        if (!editedWord.word) {
+            newErrors.word = true;
+        }
+        if (!editedWord.transcription) {
+            newErrors.transcription = true;
+        }
+        if (!editedWord.translation) {
+            newErrors.translation = true;
+        }
+        setErrors(newErrors);
+    };
 
     const handleEditClick = (index, word) => {
         setEditIdx(index);
         setEditedWord(word);
+        setErrors({});
     };
 
     const handleCancelClick = () => {
         setEditIdx(null);
         setEditedWord({});
+        setErrors({});
     };
 
     const handleSaveClick = () => {
+        validateFields();
+        if (Object.keys(errors).length > 0) {
+            alert('Произошла ошибка: не все поля заполнены корректно.');
+            return;
+        }
+        console.log('Сохраненные данные:', editedWord);
         onWordChange(editIdx, editedWord);
         handleCancelClick();
     };
@@ -41,26 +68,35 @@ function WordTable({ words, onWordChange }) {
                                         <input
                                             type="text"
                                             value={editedWord.word || ''}
-                                            onChange={(e) => setEditedWord({ ...editedWord, word: e.target.value })}
+                                            onChange={(e) =>
+                                                setEditedWord({ ...editedWord, word: e.target.value })
+                                            }
+                                            className={errors.word ? 'error' : ''}
                                         />
                                     </td>
                                     <td>
                                         <input
                                             type="text"
                                             value={editedWord.transcription || ''}
-                                            onChange={(e) => setEditedWord({ ...editedWord, transcription: e.target.value })}
+                                            onChange={(e) =>
+                                                setEditedWord({ ...editedWord, transcription: e.target.value })
+                                            }
+                                            className={errors.transcription ? 'error' : ''}
                                         />
                                     </td>
                                     <td>
                                         <input
                                             type="text"
                                             value={editedWord.translation || ''}
-                                            onChange={(e) => setEditedWord({ ...editedWord, translation: e.target.value })}
+                                            onChange={(e) =>
+                                                setEditedWord({ ...editedWord, translation: e.target.value })
+                                            }
+                                            className={errors.translation ? 'error' : ''}
                                         />
                                     </td>
                                     <td>
-                                        <button className="save-btn" onClick={handleSaveClick}>Сохранить</button>
-                                        <button className="cancel-btn" onClick={handleCancelClick}>Отменить</button>
+                                        <button onClick={handleSaveClick}>Сохранить</button>
+                                        <button onClick={handleCancelClick}>Отменить</button>
                                     </td>
                                 </>
                             ) : (
@@ -69,7 +105,7 @@ function WordTable({ words, onWordChange }) {
                                     <td>{word.transcription}</td>
                                     <td>{word.translation}</td>
                                     <td>
-                                        <button className="edit-btn" onClick={() => handleEditClick(index, word)}>Редактировать</button>
+                                        <button onClick={() => handleEditClick(index, word)}>Редактировать</button>
                                     </td>
                                 </>
                             )}

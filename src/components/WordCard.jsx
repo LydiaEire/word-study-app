@@ -2,23 +2,21 @@ import React, { useState, useEffect, useRef } from 'react';
 
 function WordCard({ word, transcription, translation, topic, children, onTranslationViewed }) {
     const [showTranslation, setShowTranslation] = useState(false);
-
     const buttonRef = useRef(null);
 
     const getTopicClass = (topic) => {
-        return topic.toLowerCase().replace(/\s+/g, '-'); 
-        
+        return topic.toLowerCase().replace(/\s+/g, '-');
     };
 
     const toggleTranslation = () => {
         if (!showTranslation) {
             onTranslationViewed();
         }
-        setShowTranslation(true); 
+        setShowTranslation(true);
     };
 
     useEffect(() => {
-        setShowTranslation(false); 
+        setShowTranslation(false);
         if (buttonRef.current) {
             buttonRef.current.focus();
         }
@@ -31,10 +29,10 @@ function WordCard({ word, transcription, translation, topic, children, onTransla
             {showTranslation ? (
                 <p className="translation">{translation}</p>
             ) : (
-                <button 
-                    className="show-translation-button" 
+                <button
+                    className="show-translation-button"
                     onClick={toggleTranslation}
-                    ref={buttonRef}
+                    ref={buttonRef} 
                 >
                     Показать перевод
                 </button>
@@ -46,4 +44,5 @@ function WordCard({ word, transcription, translation, topic, children, onTransla
 }
 
 export default WordCard;
+
 
