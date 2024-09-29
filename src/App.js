@@ -1,68 +1,34 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Navigation from './components/Navigation';
+import React, { useContext } from 'react';
+import { AppProvider, AppContext } from './context/AppContext';
 import WordTable from './components/WordTable';
-import NotFoundPage from './pages/NotFoundPage';
-import GamePage from './pages/GamePage';
+import WordCard from './components/WordCard';
+import ErrorComponent from './components/ErrorComponent';
+import LoadingIndicator from './components/LoadingIndicator';
 
-function HomePage({ words, onWordChange }) {
-  return (
-    <main className="main-content">
-      <WordTable words={words} onWordChange={onWordChange} />
-    </main>
-  );
-}
+const App = () => {
+    const { words, loading, error } = useContext(AppContext);
 
-function App() {
-  const initialWords = [
-    { word: 'Hello', transcription: '[həˈloʊ]', translation: 'Привет', topic: 'Greeting' },
-    { word: 'Book', transcription: '[bʊk]', translation: 'Книга', topic: 'Education' },
-    { word: 'Apple', transcription: '[ˈæpəl]', translation: 'Яблоко', topic: 'Food' },
-    { word: 'Banana', transcription: '[bəˈnænə]', translation: 'Банан', topic: 'Food' },
-    { word: 'Bread', transcription: '[brɛd]', translation: 'Хлеб', topic: 'Food' },
-    { word: 'Cheese', transcription: '[tʃiːz]', translation: 'Сыр', topic: 'Food' },
-    { word: 'Milk', transcription: '[mɪlk]', translation: 'Молоко', topic: 'Food' },
-    { word: 'Egg', transcription: '[ɛɡ]', translation: 'Яйцо', topic: 'Food' },
-    { word: 'Orange', transcription: '[ˈɔrɪndʒ]', translation: 'Апельсин', topic: 'Food' },
-    { word: 'Water', transcription: '[ˈwɔtər]', translation: 'Вода', topic: 'Food' },
-  ];
+    return (
+        <div>
+            <h1>Word Collection</h1>
+            {loading && <LoadingIndicator />}
+            {error && <ErrorComponent message={error} />}
+            {!loading && !error && (
+                <>
+                    <WordTable />
+                    <div className="word-cards">
+                        {words.map(word => <WordCard key={word.id} word={word} />)}
+                    </div>
+                </>
+            )}
+        </div>
+    );
+};
 
-  const [words, setWords] = useState(initialWords);
-  const [learnedCount, setLearnedCount] = useState(0);
+const AppWrapper = () => (
+    <AppProvider>
+        <App />
+    </AppProvider>
+);
 
-  const updateWord = (index, newWord) => {
-    const updatedWords = words.slice();
-    updatedWords[index] = newWord;
-    setWords(updatedWords);
-  };
-
-  const increaseLearnedCount = () => {
-    setLearnedCount(prevCount => prevCount + 1);
-  };
-
-  return (
-    <Router>
-      <div className="app-container">
-        <Navigation />
-        <Header />
-        <Routes>
-          <Route path="/" element={<HomePage words={words} onWordChange={updateWord} />} />
-          <Route path="/game" element={
-            <GamePage
-              words={words}
-              updateWord={updateWord}
-              onTranslationViewed={increaseLearnedCount}
-              learnedCount={learnedCount}
-            />}
-          />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-        <Footer />
-      </div>
-    </Router>
-  );
-}
-
-export default App;
+export default AppWrapper;
