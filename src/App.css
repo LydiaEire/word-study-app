@@ -78,10 +78,6 @@ button {
   font-size: 14px;
 }
 
-.cancel-btn:hover {
-  background-color: darkred;
-}
-
 .edit-btn:hover,
 .delete-btn:hover,
 .save-btn:hover,
@@ -195,12 +191,6 @@ tr:hover {
   td:nth-of-type(5)::before { content: "Действия"; }
 }
 
-.card-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
 
 .card-container {
   display: flex;

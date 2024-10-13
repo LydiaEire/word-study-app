@@ -1,5 +1,5 @@
-// store/WordStore.js
 import { makeAutoObservable } from 'mobx';
+import { fetchWords, addWord, updateWord, deleteWord } from '../api/WordsApi';
 
 class WordStore {
     words = [];
@@ -13,8 +13,7 @@ class WordStore {
     fetchWords = async () => {
         this.loading = true;
         try {
-            const response = await fetch('/api/words');  
-            this.words = await response.json();
+            this.words = await fetchWords();
         } catch (error) {
             this.error = 'Ошибка загрузки';
         } finally {
@@ -24,39 +23,18 @@ class WordStore {
 
     addWord = async (newWord) => {
         try {
-            const response = await fetch('/api/words', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(newWord),
-            });
-
-            if (response.ok) {
-                const addedWord = await response.json();
-                this.words.push(addedWord);
-            }
+            const addedWord = await addWord(newWord);
+            this.words.push(addedWord);
         } catch (error) {
             this.error = 'Ошибка добавления слова';
         }
     };
 
     updateWord = async (index, updatedWord) => {
-        const { word, id } = this.words[index]; 
-
+        const { id } = this.words[index];
         try {
-            const response = await fetch(`/api/words/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(updatedWord),
-            });
-
-            if (response.ok) {
-                this.words[index] = updatedWord;
-            }
-
+            const updatedData = await updateWord(id, updatedWord);
+            this.words[index] = updatedData;
         } catch (error) {
             this.error = 'Ошибка обновления слова';
         }
@@ -64,14 +42,8 @@ class WordStore {
 
     deleteWord = async (wordId) => {
         try {
-            const response = await fetch(`/api/words/${wordId}`, {
-                method: 'DELETE',
-            });
-
-            if (response.ok) {
-                this.words = this.words.filter(word => word.id !== wordId);
-            }
-
+            await deleteWord(wordId);
+            this.words = this.words.filter(word => word.id !== wordId);
         } catch (error) {
             this.error = 'Ошибка удаления слова';
         }

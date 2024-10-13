@@ -9,8 +9,13 @@ const WordTable = observer(() => {
     const [errors, setErrors] = useState({});
 
     React.useEffect(() => {
-        wordStore.fetchWords();
+        const loadWords = async () => {
+            await wordStore.fetchWords();
+            console.log(wordStore.words); 
+        };
+        loadWords();
     }, []);
+    
 
     const validateFields = () => {
         let newErrors = {};
