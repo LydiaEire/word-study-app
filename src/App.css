@@ -399,3 +399,18 @@ tr:hover {
 .error {
   border: 2px solid red;
 }
+
+.add-word-form {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.add-word-form input {
+  margin-right: 10px;
+  padding: 5px;
+}
+
+.add-word-form button {
+  padding: 5px 10px;
+}
